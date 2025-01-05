@@ -1,5 +1,8 @@
 from store.store import Store
 from store.product import Product
+from colorama import init, Fore, Back
+
+init(autoreset=True)
 
 
 def convert_comma_to_dot(value):
@@ -14,13 +17,14 @@ def main():
     store = Store("data/products.json")
 
     while True:
-        print("\nSistema de Gerenciamento de Produtos da Loja AgilStore")
-        print("1. Adicionar Produto")
-        print("2. Listar Produtos")
-        print("3. Atualizar Produto")
-        print("4. Excluir Produto")
-        print("5. Buscar Produto")
-        print("6. Sair")
+        print(
+            f"\n{Fore.LIGHTYELLOW_EX}Sistema de Gerenciamento de Produtos da Loja AgilStore")
+        print(f"{Fore.GREEN}1. Adicionar Produto")
+        print(f"{Fore.GREEN}2. Listar Produtos")
+        print(f"{Fore.GREEN}3. Atualizar Produto")
+        print(f"{Fore.GREEN}4. Excluir Produto")
+        print(f"{Fore.GREEN}5. Buscar Produto")
+        print(f"{Fore.RED}6. Sair")
         escolha = input("Selecione uma opção: ")
 
         if escolha == '1':
@@ -32,19 +36,22 @@ def main():
                 input("Digite o preço do produto: ")))
             store.add_product(
                 Product(nome, categoria, quantidade_em_estoque, preco))
+            print(f"{Fore.GREEN}Produto adicionado com sucesso!")
         elif escolha == '2':
             filter_by = input(
                 "Filtrar por categoria (deixe em branco para não filtrar): ")
             sort_by = input(
-                "Ordenar por (nome, quantidade, preco, deixe em branco para não ordenar): ")
+                "Ordenar por (nome, quantidade, preco ou deixe em branco para não ordenar): ")
             products = store.list_products(
                 filter_by if filter_by else None, sort_by if sort_by else None)
             print(
-                f"{'ID':<36} {'Nome':<29} {'Categoria':<15} {'Quantidade':<10} {'Preço':<10}")
+                f"{Fore.LIGHTYELLOW_EX}{Back.BLUE}{'ID':<36} {'Nome':<29} {'Categoria':<15} {'Quantidade':<10} {'Preço (R$)':<10}")
+            fc = True
             for prod in products:
                 nome_truncado = truncate_string(prod.nome, 29)
                 print(
-                    f"{prod.id:<36} {nome_truncado:<29} {prod.categoria:<15} {prod.quantidade_em_estoque:<10} R$ {prod.preco:<10.2f}")
+                    f"{Fore.BLACK if fc else Fore.WHITE}{Back.LIGHTYELLOW_EX if fc else Back.BLUE}{prod.id:<36} {nome_truncado:<29} {prod.categoria:<15} {prod.quantidade_em_estoque:<10} {prod.preco:>10.2f}")
+                fc = not fc
         elif escolha == '3':
             id = input("Digite o ID do produto: ")
             if store.get_product(id):
@@ -64,8 +71,9 @@ def main():
                         quantidade_em_estoque) if quantidade_em_estoque else None,
                     preco=float(preco) if preco else None
                 )
+                print(f"{Fore.GREEN}Produto atualizado com sucesso!")
             else:
-                print("Produto não encontrado.")
+                print(f"{Fore.RED}Produto não encontrado.")
         elif escolha == '4':
             id = input("Digite o ID do produto: ")
             if store.get_product(id):
@@ -73,23 +81,26 @@ def main():
                     "Tem certeza que deseja excluir este produto? (s/n): ")
                 if confirm.lower() == 's':
                     store.delete_product(id)
-                    print("Produto excluído com sucesso.")
+                    print(f"{Fore.GREEN}Produto excluído com sucesso.")
                 else:
-                    print("Ação cancelada.")
+                    print(f"{Fore.GREEN}Ação cancelada.")
             else:
-                print("Produto não encontrado.")
+                print(f"{Fore.RED}Produto não encontrado.")
         elif escolha == '5':
             search_term = input("Digite o ID ou parte do nome do produto: ")
             results = store.search_products(search_term)
             if results:
+                fc = True
                 for prod in results:
-                    print(prod.to_dict())
+                    print(
+                        f"{Fore.LIGHTRED_EX if fc else Fore.LIGHTMAGENTA_EX}{prod.to_dict()}")
+                    fc = not fc
             else:
-                print("Produto não encontrado.")
+                print(f"{Fore.RED}Produto não encontrado.")
         elif escolha == '6':
             break
         else:
-            print("Opção inválida. Tente novamente.")
+            print(f"{Fore.RED}Opção inválida. Tente novamente.")
 
 
 if __name__ == "__main__":
