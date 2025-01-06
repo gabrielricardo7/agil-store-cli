@@ -22,14 +22,17 @@ def main():
 
         if escolha == '1':
             nome = input("Digite o nome do produto: ")
-            categoria = input("Digite a categoria do produto: ")
-            quantidade_em_estoque = int(convert_comma_to_dot(
-                input("Digite a quantidade em estoque: ")))
-            preco = float(convert_comma_to_dot(
-                input("Digite o preço do produto: ")))
-            store.add_product(
-                Product(nome, categoria, quantidade_em_estoque, preco))
-            print(f"{Fore.GREEN}Produto adicionado com sucesso!")
+            if store.get_product_by_name(nome):
+                print(f"{Fore.RED}Erro: Produto com o nome '{nome}' já existe.")
+            else:
+                categoria = input("Digite a categoria do produto: ")
+                quantidade_em_estoque = int(convert_comma_to_dot(
+                    input("Digite a quantidade em estoque: ")))
+                preco = float(convert_comma_to_dot(
+                    input("Digite o preço do produto: ")))
+                store.add_product(
+                    Product(nome, categoria, quantidade_em_estoque, preco))
+                print(f"{Fore.GREEN}Produto adicionado com sucesso!")
             wait_to_continue()
         elif escolha == '2':
             filter_by = input(
@@ -44,7 +47,7 @@ def main():
             for prod in products:
                 nome_truncado = truncate_string(prod.nome, 29)
                 print(
-                    f"{Fore.BLACK if fc else Fore.WHITE}{Back.LIGHTYELLOW_EX if fc else Back.BLUE}{prod.id:<36} {nome_truncado:<29} {prod.categoria:<15} {prod.quantidade_em_estoque:<10} {prod.preco:>10.2f}")
+                    f"{Fore.BLACK if fc else Fore.WHITE}{Back.LIGHTYELLOW_EX if fc else Back.BLUE}{prod.id:<36} {nome_truncado:<29} {prod.categoria:<15} {prod.quantidade_em_estoque:>10} {prod.preco:>10.2f}")
                 fc = not fc
             wait_to_continue()
         elif escolha == '3':
