@@ -1,0 +1,149 @@
+[
+    {
+        "id": "05b6179f-af92-483a-b00c-d3c5bec17cef",
+        "nome": "iPhone 13 Pro",
+        "categoria": "Smartphones",
+        "quantidade_em_estoque": 15,
+        "preco": 7999.0
+    },
+    {
+        "id": "374d8844-dc2d-4a7c-bb65-22b5c05d3bf7",
+        "nome": "Samsung Galaxy S21 Ultra",
+        "categoria": "Smartphones",
+        "quantidade_em_estoque": 20,
+        "preco": 6499.0
+    },
+    {
+        "id": "6552b140-da22-4c91-bccf-a6d33f40f71b",
+        "nome": "Google Pixel 6",
+        "categoria": "Smartphones",
+        "quantidade_em_estoque": 10,
+        "preco": 4299.0
+    },
+    {
+        "id": "208abcde-4eec-4bca-822b-b3a6cb1079f7",
+        "nome": "OnePlus 9 Pro",
+        "categoria": "Smartphones",
+        "quantidade_em_estoque": 12,
+        "preco": 5299.0
+    },
+    {
+        "id": "720d265c-bef2-411a-aa7a-143daf268acc",
+        "nome": "Xiaomi Mi 11 Ultra",
+        "categoria": "Smartphones",
+        "quantidade_em_estoque": 8,
+        "preco": 4899.0
+    },
+    {
+        "id": "9dff24b4-2c55-4618-9531-7b5153d2771e",
+        "nome": "MacBook Pro (M1)",
+        "categoria": "Laptops",
+        "quantidade_em_estoque": 5,
+        "preco": 12999.0
+    },
+    {
+        "id": "c9d6941a-2e52-4d6f-bca9-2a8ab3f3ed33",
+        "nome": "Dell XPS 13",
+        "categoria": "Laptops",
+        "quantidade_em_estoque": 7,
+        "preco": 9499.0
+    },
+    {
+        "id": "fedf4420-1488-4a5c-ad56-f83004f16c53",
+        "nome": "HP Spectre x360",
+        "categoria": "Laptops",
+        "quantidade_em_estoque": 6,
+        "preco": 8999.0
+    },
+    {
+        "id": "4a986faf-58b7-40d7-a47f-46ac9c594d70",
+        "nome": "Lenovo ThinkPad X1 Carbon",
+        "categoria": "Laptops",
+        "quantidade_em_estoque": 10,
+        "preco": 10499.0
+    },
+    {
+        "id": "40f87ca1-fbb3-4fb0-ab45-4bd2e15bbffd",
+        "nome": "Asus ROG Zephyrus G14",
+        "categoria": "Laptops",
+        "quantidade_em_estoque": 4,
+        "preco": 11299.0
+    },
+    {
+        "id": "6ae0dba2-ae74-43ee-b9e9-f9e224d31272",
+        "nome": "Cabo Lightning para USB-C",
+        "categoria": "Cabos",
+        "quantidade_em_estoque": 60,
+        "preco": 129.0
+    },
+    {
+        "id": "bcd9ffcb-d032-4eff-8637-9d1096c89b63",
+        "nome": "Cabo USB-C para USB-C",
+        "categoria": "Cabos",
+        "quantidade_em_estoque": 70,
+        "preco": 79.0
+    },
+    {
+        "id": "ac75e180-cbd5-4440-87b8-9f55b3a67efd",
+        "nome": "Cabo HDMI para HDMI",
+        "categoria": "Cabos",
+        "quantidade_em_estoque": 50,
+        "preco": 99.0
+    },
+    {
+        "id": "0a778326-2900-49f5-a621-a4c76f086fcc",
+        "nome": "Carregador R\u00e1pido USB-C 20W",
+        "categoria": "Carregadores",
+        "quantidade_em_estoque": 50,
+        "preco": 149.0
+    },
+    {
+        "id": "7d6bac5b-1bc5-4f07-97b7-32de52301be8",
+        "nome": "Carregador Sem Fio Qi",
+        "categoria": "Carregadores",
+        "quantidade_em_estoque": 30,
+        "preco": 199.0
+    },
+    {
+        "id": "cdd08f77-514c-4319-a6e2-fdd97b638c24",
+        "nome": "Carregador Porta USB p/ Carro",
+        "categoria": "Carregadores",
+        "quantidade_em_estoque": 40,
+        "preco": 99.0
+    },
+    {
+        "id": "fc6959a5-c162-4308-8b96-240955e049d2",
+        "nome": "AirPods Pro",
+        "categoria": "Fones de Ouvido",
+        "quantidade_em_estoque": 25,
+        "preco": 1999.0
+    },
+    {
+        "id": "ab8959fd-12ab-4a64-8e72-29e4341ee9d6",
+        "nome": "Sony WH-1000XM4",
+        "categoria": "Fones de Ouvido",
+        "quantidade_em_estoque": 15,
+        "preco": 1499.0
+    },
+    {
+        "id": "08d6e197-c33f-4aec-a61f-86f43e227932",
+        "nome": "Bose QuietComfort 35 II",
+        "categoria": "Fones de Ouvido",
+        "quantidade_em_estoque": 10,
+        "preco": 1699.0
+    },
+    {
+        "id": "e48d4092-bf62-4a2d-86b6-fc9b193e1a51",
+        "nome": "Jabra Elite 75t",
+        "categoria": "Fones de Ouvido",
+        "quantidade_em_estoque": 20,
+        "preco": 899.0
+    },
+    {
+        "id": "b9eb67d5-fa15-40b4-b847-41d6dae442f3",
+        "nome": "Sennheiser Momentum 3",
+        "categoria": "Fones de Ouvido",
+        "quantidade_em_estoque": 12,
+        "preco": 1899.0
+    }
+]
