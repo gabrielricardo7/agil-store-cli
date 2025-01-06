@@ -27,7 +27,7 @@ class Store:
     def list_products(self, filter_by=None, sort_by=None):
         if filter_by:
             filtered = [
-                prod for prod in self.products if prod.categoria.lower() == filter_by.lower()]
+                prod for prod in self.products if filter_by.lower() in prod.categoria.lower()]
         else:
             filtered = self.products
 
@@ -46,6 +46,12 @@ class Store:
     def get_product(self, product_id):
         for prod in self.products:
             if prod.id == product_id:
+                return prod
+        return None
+
+    def get_product_by_name(self, product_name):
+        for prod in self.products:
+            if prod.nome == product_name:
                 return prod
         return None
 
