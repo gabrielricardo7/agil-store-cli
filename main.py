@@ -1,16 +1,9 @@
 from store.store import Store
 from store.product import Product
+from store.utils import convert_comma_to_dot, truncate_string, wait_to_continue
 from colorama import init, Fore, Back
 
 init(autoreset=True)
-
-
-def convert_comma_to_dot(value):
-    return value.replace(',', '.')
-
-
-def truncate_string(string, max_length):
-    return string if len(string) <= max_length else string[:max_length - 3] + '...'
 
 
 def main():
@@ -37,6 +30,7 @@ def main():
             store.add_product(
                 Product(nome, categoria, quantidade_em_estoque, preco))
             print(f"{Fore.GREEN}Produto adicionado com sucesso!")
+            wait_to_continue()
         elif escolha == '2':
             filter_by = input(
                 "Filtrar por categoria (deixe em branco para não filtrar): ")
@@ -52,6 +46,7 @@ def main():
                 print(
                     f"{Fore.BLACK if fc else Fore.WHITE}{Back.LIGHTYELLOW_EX if fc else Back.BLUE}{prod.id:<36} {nome_truncado:<29} {prod.categoria:<15} {prod.quantidade_em_estoque:<10} {prod.preco:>10.2f}")
                 fc = not fc
+            wait_to_continue()
         elif escolha == '3':
             id = input("Digite o ID do produto: ")
             if store.get_product(id):
@@ -74,6 +69,7 @@ def main():
                 print(f"{Fore.GREEN}Produto atualizado com sucesso!")
             else:
                 print(f"{Fore.RED}Produto não encontrado.")
+            wait_to_continue()
         elif escolha == '4':
             id = input("Digite o ID do produto: ")
             if store.get_product(id):
@@ -86,6 +82,7 @@ def main():
                     print(f"{Fore.GREEN}Ação cancelada.")
             else:
                 print(f"{Fore.RED}Produto não encontrado.")
+            wait_to_continue()
         elif escolha == '5':
             search_term = input("Digite o ID ou parte do nome do produto: ")
             results = store.search_products(search_term)
@@ -97,10 +94,12 @@ def main():
                     fc = not fc
             else:
                 print(f"{Fore.RED}Produto não encontrado.")
+            wait_to_continue()
         elif escolha == '6':
             break
         else:
             print(f"{Fore.RED}Opção inválida. Tente novamente.")
+            wait_to_continue()
 
 
 if __name__ == "__main__":
