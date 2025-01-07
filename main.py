@@ -1,9 +1,17 @@
+try:
+    from colorama import init, Fore, Back
+    init(autoreset=True)
+except ImportError:
+    class ColorFallback:
+        def __getattr__(self, name):
+            return ''
+
+    Fore = ColorFallback()
+    Back = ColorFallback()
+
 from store.store import Store
 from store.product import Product
 from store.utils import convert_comma_to_dot, truncate_string, wait_to_continue
-from colorama import init, Fore, Back
-
-init(autoreset=True)
 
 
 def main():
