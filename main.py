@@ -1,17 +1,6 @@
-try:
-    from colorama import init, Fore, Back
-    init(autoreset=True)
-except ImportError:
-    class ColorFallback:
-        def __getattr__(self, name):
-            return ''
-
-    Fore = ColorFallback()
-    Back = ColorFallback()
-
 from store.store import Store
 from store.product import Product
-from store.utils import convert_comma_to_dot, truncate_string, wait_to_continue
+from store.utils import Back, Fore, convert_comma_to_dot, request_input, truncate_string, wait_to_continue
 
 
 def main():
@@ -29,18 +18,23 @@ def main():
         escolha = input("Selecione uma opção: ")
 
         if escolha == '1':
-            nome = input("Digite o nome do produto: ")
-            if store.get_product_by_name(nome):
+            nome = request_input("Digite o nome do produto: ", 'str')
+            while store.get_product_by_name(nome):
                 print(f"{Fore.RED}Erro: Produto com o nome '{nome}' já existe.")
-            else:
-                categoria = input("Digite a categoria do produto: ")
-                quantidade_em_estoque = int(convert_comma_to_dot(
-                    input("Digite a quantidade em estoque: ")))
-                preco = float(convert_comma_to_dot(
-                    input("Digite o preço do produto: ")))
-                store.add_product(
-                    Product(nome, categoria, quantidade_em_estoque, preco))
-                print(f"{Fore.GREEN}Produto adicionado com sucesso!")
+                nome = request_input("Digite o nome do produto: ", 'str')
+            categoria = request_input(
+                "Digite a categoria do produto: ", 'str')
+            quantidade_em_estoque = request_input(
+                "Digite a quantidade em estoque: ", 'int')
+            preco = request_input("Digite o preço do produto: ", 'float')
+
+            quantidade_em_estoque = int(quantidade_em_estoque)
+            preco = float(convert_comma_to_dot(preco))
+
+            store.add_product(
+                Product(nome, categoria, quantidade_em_estoque, preco))
+            print(f"{Fore.GREEN}Produto adicionado com sucesso!")
+
             wait_to_continue()
         elif escolha == '2':
             filter_by = input(
@@ -61,14 +55,25 @@ def main():
         elif escolha == '3':
             id = input("Digite o ID do produto: ")
             if store.get_product(id):
-                nome = input(
-                    "Digite o novo nome (deixe em branco para manter o atual): ")
-                categoria = input(
-                    "Digite a nova categoria (deixe em branco para manter a atual): ")
-                quantidade_em_estoque = convert_comma_to_dot(input(
-                    "Digite a nova quantidade em estoque (deixe em branco para manter o atual): "))
-                preco = convert_comma_to_dot(
-                    input("Digite o novo preço (deixe em branco para manter o atual): "))
+                nome = request_input(
+                    "Digite o novo nome (deixe em branco para manter o atual): ", 'str', obrigatorio=False)
+                while nome != None and store.get_product_by_name(nome):
+                    print(f"{Fore.RED}Erro: Produto com o nome '{
+                          nome}' já existe.")
+                    nome = request_input(
+                        "Digite o novo nome (deixe em branco para manter o atual): ", 'str', obrigatorio=False)
+                categoria = request_input(
+                    "Digite a nova categoria (deixe em branco para manter a atual): ", 'str', obrigatorio=False)
+                quantidade_em_estoque = request_input(
+                    "Digite a nova quantidade em estoque (deixe em branco para manter o atual): ", 'int', obrigatorio=False)
+                preco = request_input(
+                    "Digite o novo preço (deixe em branco para manter o atual): ", 'float', obrigatorio=False)
+
+                quantidade_em_estoque = int(
+                    quantidade_em_estoque) if quantidade_em_estoque else None
+
+                preco = float(convert_comma_to_dot(preco)) if preco else None
+
                 store.update_product(
                     id,
                     nome=nome if nome else None,
@@ -90,7 +95,7 @@ def main():
                     store.delete_product(id)
                     print(f"{Fore.GREEN}Produto excluído com sucesso.")
                 else:
-                    print(f"{Fore.GREEN}Ação cancelada.")
+                    print(f"{Fore.YELLOW}Ação cancelada.")
             else:
                 print(f"{Fore.RED}Produto não encontrado.")
             wait_to_continue()

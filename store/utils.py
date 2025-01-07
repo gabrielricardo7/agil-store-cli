@@ -1,5 +1,53 @@
+try:
+    from colorama import init, Fore, Back
+    init(autoreset=True)
+except ImportError:
+    class ColorFallback:
+        def __getattr__(self, name):
+            return ''
+
+    Fore = ColorFallback()
+    Back = ColorFallback()
+
+
 def convert_comma_to_dot(value):
     return value.replace(',', '.')
+
+
+def is_not_empty(value):
+    return bool(value and value.strip())
+
+
+def is_valid_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
+def is_valid_integer(value):
+    try:
+        int(value)
+        return True
+    except ValueError:
+        return False
+
+
+def request_input(mensagem, tipo, obrigatorio=True):
+    while True:
+        entrada = input(mensagem)
+        if obrigatorio and not is_not_empty(entrada):
+            print(f"{Fore.RED}Erro: Campo obrigatório não pode ser vazio.")
+            continue
+        if len(entrada) != 0:
+            if tipo == 'int' and not is_valid_integer(entrada):
+                print(f"{Fore.RED}Erro: Deve ser um número inteiro.")
+                continue
+            if tipo == 'float' and not is_valid_float(convert_comma_to_dot(entrada)):
+                print(f"{Fore.RED}Erro: Deve ser um número decimal.")
+                continue
+        return entrada
 
 
 def truncate_string(string, max_length):
@@ -7,4 +55,4 @@ def truncate_string(string, max_length):
 
 
 def wait_to_continue():
-    input("\nPressione [enter] para continuar...")
+    input(f"\n{Fore.LIGHTBLUE_EX}Pressione [enter] para continuar...")
