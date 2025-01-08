@@ -1,5 +1,5 @@
 try:
-    from colorama import init, Fore, Back
+    from colorama import init, Fore, Back, Style
     init(autoreset=True)
 except ImportError:
     class ColorFallback:
@@ -8,10 +8,23 @@ except ImportError:
 
     Fore = ColorFallback()
     Back = ColorFallback()
+    Style = ColorFallback()
 
 
 def convert_comma_to_dot(value):
     return value.replace(',', '.')
+
+
+def detail_prod(product, show_id=False):
+    print(f"{Fore.BLUE}Detalhes do produto:")
+    keys = [k for k in product.__dict__.keys() if k != 'id']
+    values = [v for v in product.__dict__.values() if v !=
+              product.id]
+    for k, v in zip(keys, values):
+        print(f"{Fore.CYAN}{k}:{Fore.LIGHTGREEN_EX}{
+              " R$ " if k == 'preco' else " "}"+Style.RESET_ALL+f"{v}")
+    if show_id:
+        print(f"{Fore.MAGENTA}id: "+Style.RESET_ALL+f"{product.id}")
 
 
 def is_not_empty(value):
